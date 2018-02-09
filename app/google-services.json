@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "646516035572",
+    "firebase_url": "https://sissu-a13f2.firebaseio.com",
+    "project_id": "sissu-a13f2",
+    "storage_bucket": "sissu-a13f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646516035572:android:230b3904a6cbe1d8",
+        "android_client_info": {
+          "package_name": "com.example.pragnesh.sissu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646516035572-1lesrbk9q0tclqck6vcun2gfcpk981lg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pragnesh.sissu",
+            "certificate_hash": "d9480593ff4f46aca4f8dcc1173b8acdbf158153"
+          }
+        },
+        {
+          "client_id": "646516035572-rkvqpl2a7s08vr0k7qi8h6a5g74ucko5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA91zJoeUEMn27oGLElLIx8SRiWqdu4Ryk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646516035572-rkvqpl2a7s08vr0k7qi8h6a5g74ucko5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

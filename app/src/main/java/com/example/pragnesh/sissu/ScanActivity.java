@@ -41,7 +41,7 @@ public class ScanActivity extends AppCompatActivity {
             this.finish();
         }
         cameraSource = new CameraSource.Builder(this, barcode)
-                .setFacing(cameraSource.CAMERA_FACING_BACK)
+                .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedFps(24)
                 .setAutoFocusEnabled(true)
                 .setRequestedPreviewSize(1920,1024)
@@ -68,6 +68,7 @@ public class ScanActivity extends AppCompatActivity {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
+                cameraSource.stop();
 
             }
         });
@@ -89,6 +90,12 @@ public class ScanActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cameraSource.release();
+        barcode.release();
     }
 
 }
