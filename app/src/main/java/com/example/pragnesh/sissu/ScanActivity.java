@@ -35,8 +35,7 @@ public class ScanActivity extends AppCompatActivity {
         barcode = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
                 .build();
-        if(!barcode.isOperational())
-        {
+        if (!barcode.isOperational()) {
             Toast.makeText(getApplicationContext(), "Please,try again", Toast.LENGTH_LONG).show();
             this.finish();
         }
@@ -44,19 +43,16 @@ public class ScanActivity extends AppCompatActivity {
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedFps(24)
                 .setAutoFocusEnabled(true)
-                .setRequestedPreviewSize(1920,1024)
+                .setRequestedPreviewSize(1920, 1024)
                 .build();
         cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                try
-                {
-                    if(ContextCompat.checkSelfPermission(ScanActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
-                    {
+                try {
+                    if (ContextCompat.checkSelfPermission(ScanActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                         cameraSource.start(cameraView.getHolder());
                     }
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -81,8 +77,7 @@ public class ScanActivity extends AppCompatActivity {
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
-                if(barcodes.size() > 0)
-                {
+                if (barcodes.size() > 0) {
                     Intent intent = new Intent();
                     intent.putExtra("barcode", barcodes.valueAt(0));
                     setResult(RESULT_OK, intent);
@@ -91,6 +86,7 @@ public class ScanActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
