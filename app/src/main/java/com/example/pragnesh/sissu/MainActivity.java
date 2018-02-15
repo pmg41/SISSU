@@ -24,12 +24,13 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
     Button scanbtn;
     TextView result;
+    String param,pass;
     private TextView DBresult;
     public static final int REQUEST_CODE = 100;
     public static final int PERMISSION_REQUEST = 200;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRootReference = firebaseDatabase.getReference();
-    private DatabaseReference mChildReference = mRootReference.child("message");
+    private DatabaseReference mChildReference;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         scanbtn = (Button) findViewById(R.id.scanbtn);
         result = (TextView) findViewById(R.id.result);
         DBresult = (TextView) findViewById(R.id.dbresult);
-        DBresult.setText("output of barcode");
+        DBresult.setText("Result will be coming Soon....");
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
         {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, PERMISSION_REQUEST);
@@ -63,27 +64,39 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         result.setText(barcode.displayValue);
+                        pass = barcode.rawValue;
+                        passing(pass);
                     }
                 });
             }
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mChildReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+    protected void passing(String s) {
+        try {
+            param = s;
+            mChildReference = mRootReference.child(param);
+            mChildReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
                     String message = dataSnapshot.getValue(String.class);
-                    DBresult.setText(message);
-            }
+                    if (message != null) {
+                        DBresult.setText(message);
+                    } else {
+                        DBresult.setText("Product is not available in our Database...");
+                    }
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            DBresult.setText(e.toString());
+        }
     }
 }
