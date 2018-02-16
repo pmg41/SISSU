@@ -16,6 +16,13 @@
         android:padding="5dp"
         android:textSize="25sp" />
 
+    <ListView
+        android:id="@+id/Product_detail_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/result"
+        android:layout_alignParentTop="true" />
+
     <Button
         android:id="@+id/scanbtn"
         android:layout_width="match_parent"
@@ -26,10 +33,5 @@
         android:text="Scan Your Product"
         tools:ignore="HardcodedText" />
 
-    <ListView
-        android:id="@+id/Product_detail_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/result"
-        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

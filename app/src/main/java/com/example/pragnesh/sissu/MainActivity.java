@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     protected void passing(String param) {
-        result.setText("resut1");
         final ArrayList<String> productDetail = new ArrayList<>();
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, productDetail);
         ProductDetailList.setAdapter(arrayAdapter);
@@ -85,9 +84,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 result.setText("resut3");
-                String readValue = dataSnapshot.getValue(String.class);
+                String readValue = dataSnapshot.getValue().toString();
                 if (readValue != null) {
                     productDetail.add(readValue);
+                    result.setText("Data Reading Successfully occur!!!");
                     arrayAdapter.notifyDataSetChanged();
                     } else {
                     result.setText("Scanned product is not available in our database!!!!!");
@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                result.setText("Database Error!!!");
 
             }
         });
